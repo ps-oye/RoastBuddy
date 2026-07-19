@@ -1,8 +1,33 @@
 # Roast Buddy
 
-> Animated bot characters that roast you for blindly accepting AI code and cheer you when you manually type or edit code.
+<p align="center">
+  <img src="media/icon_transparent.png" alt="Roast Buddy Icon" width="150"/>
+</p>
 
-Roast Buddy is a VS Code extension that makes coding more engaging and humorous by adding animated side-bar characters that react to how you handle AI-generated code suggestions.
+Roast Buddy is a VS Code extension that adds humor to your workflow with animated sidebar characters. It roasts you when you accept AI‑generated code (Github Copilot Chat), and cheers you when you write or edit code manually — making every coding session sarcastically delightful.
+
+![Version](https://img.shields.io/visual-studio-marketplace/v/ps-oye.roast-buddy)
+![Downloads](https://img.shields.io/visual-studio-marketplace/d/ps-oye.roast-buddy)
+![Stars](https://img.shields.io/github/stars/ps-oye/roast-buddy?style=social)
+![License](https://img.shields.io/github/license/ps-oye/roast-buddy)
+
+---
+
+## 🎬 Demo
+
+<video src="media/demo.mp4" width="800" autoplay loop muted></video>
+
+---
+
+## Installation
+
+From VS Code Marketplace:  
+👉 [Install PS Oye Roast Buddy](https://marketplace.visualstudio.com/items?itemName=ps-oye.roast-buddy)
+
+Or via CLI:
+```bash
+ext install ps-oye.roast-buddy
+```
 
 ## Features
 
@@ -11,7 +36,9 @@ Roast Buddy is a VS Code extension that makes coding more engaging and humorous 
 - **Boy Bot** - Blue headset robot buddy
 - **Girl Bot** - Pink bow robot buddy
 
-Both bots are built with HTML and CSS only. Their head, body, arms, legs, bulb, headset, and accessories are separate elements so reactions can animate naturally without swapping images.
+### Languages
+
+- **English & Hinglish** - Message language is configurable in settings; dynamic messages respect the chosen language.
 
 ### Smart Roasts
 
@@ -44,18 +71,6 @@ Enable dynamic mode to get uniquely generated roasts and cheers powered by your 
 - **Medium** - Balanced wit, the sweet spot
 - **Savage** - No mercy, enter at your own risk
 
-## Installation
-
-1. Open VS Code
-2. Go to Extensions (`Ctrl+Shift+X`)
-3. Search for "Roast Buddy"
-4. Click Install
-
-Or install from VSIX:
-
-```bash
-code --install-extension roast-buddy-0.1.0.vsix
-```
 
 ## Configuration
 
@@ -80,6 +95,18 @@ code --install-extension roast-buddy-0.1.0.vsix
 - Dynamic mode clearly discloses token consumption before activation
 - Works fully offline with curated fallback messages
 - Uses original CSS-only character art, no image replacement for reactions
+
+## 🌟 Why Star This Repo
+Every ⭐ helps PS-Oye roast more developers worldwide.
+Show your support — it’s free, funny, and fuels creativity.
+
+## 🤝 Contribute
+Got a new roast line or animation idea? Fork it and make PS-Oye sassier.
+PRs welcome — humor encouraged.
+
+## 🔗 Links
+Marketplace: https://marketplace.visualstudio.com/publishers/ps-oye
+Follow me on Instagram: @ps_oye
 
 ## License
 
