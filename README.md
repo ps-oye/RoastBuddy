@@ -1,21 +1,17 @@
 # Roast Buddy
 
 <p align="center">
-  <img src="media/icon_transparent.png" alt="Roast Buddy Icon" width="150"/>
+  <img src="https://github.com/ps-oye/RoastBuddy/blob/main/media/icon_transparent.png" 
+       alt="Roast Buddy Icon" width="150"/>
 </p>
 
 Roast Buddy is a VS Code extension that adds humor to your workflow with animated sidebar characters. It roasts you when you accept AI‑generated code (Github Copilot Chat), and cheers you when you write or edit code manually — making every coding session sarcastically delightful.
-
-![Version](https://img.shields.io/visual-studio-marketplace/v/ps-oye.roast-buddy)
-![Downloads](https://img.shields.io/visual-studio-marketplace/d/ps-oye.roast-buddy)
-![Stars](https://img.shields.io/github/stars/ps-oye/roast-buddy?style=social)
-![License](https://img.shields.io/github/license/ps-oye/roast-buddy)
 
 ---
 
 ## 🎬 Demo
 
-<video src="media/demo.mp4" width="800" autoplay loop muted></video>
+![Demo](https://github.com/ps-oye/RoastBuddy/blob/main/media/demo.gif)
 
 ---
 
@@ -33,8 +29,17 @@ ext install ps-oye.roast-buddy
 
 ### Two CSS-Only Bot Characters
 
-- **Boy Bot** - Blue headset robot buddy
-- **Girl Bot** - Pink bow robot buddy
+<p align="center">
+  <img src="https://github.com/ps-oye/RoastBuddy/blob/main/media/boyBot.png" alt="Boy Bot" width="200"/>
+  <br/>
+  <b>Boy Bot</b> — Blue headset robot buddy
+</p>
+
+<p align="center">
+  <img src="https://github.com/ps-oye/RoastBuddy/blob/main/media/girlBot.png" alt="Girl Bot" width="200"/>
+  <br/>
+  <b>Girl Bot</b> — Pink bow robot buddy
+</p>
 
 ### Languages
 
@@ -105,8 +110,8 @@ Got a new roast line or animation idea? Fork it and make PS-Oye sassier.
 PRs welcome — humor encouraged.
 
 ## 🔗 Links
-Marketplace: https://marketplace.visualstudio.com/publishers/ps-oye
-Follow me on Instagram: @ps_oye
+- Marketplace: https://marketplace.visualstudio.com/publishers/ps-oye
+- Follow me on Instagram: [@ps_oye](https://www.instagram.com/ps_oye/)
 
 ## License
 
