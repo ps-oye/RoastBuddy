@@ -30,21 +30,18 @@ ext install ps-oye.roast-buddy
 ### Two CSS-Only Bot Characters
 
 <p align="center">
-  <table align="center">
-    <tr>
-      <td align="center">
-       <img src="https://github.com/ps-oye/RoastBuddy/blob/main/media/boyBot.png" 
-       alt="Roast Buddy Icon" width="150"/>   
-        <b>Boy Bot</b>
-      </td>
-      <td align="center">
-        <img src="https://github.com/ps-oye/RoastBuddy/blob/main/media/girlBot.png" 
+  <span style="display:inline-block; text-align:center; margin:20px;">
+    <img src="https://github.com/ps-oye/RoastBuddy/blob/main/media/boyBot.png" 
+       alt="Roast Buddy Icon" width="150"/>  
+    <b>Boy Bot</b>
+  </span>
+  <span style="display:inline-block; text-align:center; margin:20px;">
+    <img src="https://github.com/ps-oye/RoastBuddy/blob/main/media/girlBot.png" 
        alt="Demo" width="150"/>
-        <b>Girl Bot</b>
-      </td>
-    </tr>
-  </table>
+    <b>Girl Bot</b>
+  </span>
 </p>
+
 
 
 ### Languages
