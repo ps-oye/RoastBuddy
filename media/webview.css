@@ -1,0 +1,683 @@
+/* ===================================================
+   ROAST BUDDY — SVG Robot Character Styles & Animations
+   =================================================== */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --outline: #0c1326;
+    --white: #ffffff;
+    --blue: #5e7ef7;
+    --blue-dark: #3f5fe8;
+    --blue-light: #86a3ff;
+    --green: #4cff8e;
+    --green-glow: #22e66a;
+    --red: #ff3434;
+    --red-glow: #ff1a1a;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    color: var(--vscode-foreground, #d6d6d6);
+    font-family: "Segoe UI", system-ui, sans-serif;
+    background: transparent;
+}
+
+/* ══════════════════════════════════════════════════════
+   LAYOUT — Single column, character at bottom
+   ══════════════════════════════════════════════════════ */
+
+#roast-buddy-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-width: 190px;
+    overflow: hidden;
+    background:
+        radial-gradient(circle at 50% 22%,
+            color-mix(in srgb, var(--vscode-editor-background, #1f1f1f) 80%, #ffffff) 0 1px,
+            transparent 1px 100%),
+        linear-gradient(180deg,
+            var(--vscode-sideBar-background, #181818),
+            var(--vscode-editor-background, #1e1e1e));
+    background-size: 18px 18px, auto;
+}
+
+/* Particles overlay */
+#particles-canvas {
+    position: absolute;
+    inset: 0;
+    z-index: 8;
+    pointer-events: none;
+}
+
+/* Character stage — fills the container, holds robot + bubble */
+#character-stage {
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    overflow: hidden;
+}
+
+/* ══════════════════════════════════════════════════════
+   SPEECH BUBBLE — Comic-book style, just above the robot
+   ══════════════════════════════════════════════════════ */
+
+#speech-bubble {
+    position: absolute;
+    z-index: 20;
+    width: min(88vw, 230px);
+    min-height: 50px;
+    padding: 10px 14px 12px;
+    color: #171717;
+    background: #fffdf7;
+    border: 4px solid var(--outline);
+    border-radius: 18px 18px 18px 4px;
+    box-shadow: 3px 4px 0 var(--outline), inset 0 -2px 0 rgba(0, 0, 0, 0.08);
+    opacity: 0;
+    /* default hidden position — JS will set bottom/left dynamically */
+    bottom: 140px;
+    left: 10px;
+    pointer-events: none;
+}
+
+#speech-bubble.hidden {
+    display: none;
+}
+
+/* Tail pointing down toward character */
+#speech-bubble::after {
+    content: "";
+    position: absolute;
+    left: 20px;
+    bottom: -14px;
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 14px solid var(--outline);
+}
+
+#speech-bubble::before {
+    content: "";
+    position: absolute;
+    left: 22px;
+    bottom: -8px;
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 10px solid #fffdf7;
+    z-index: 2;
+}
+
+#speech-bubble.roast-mode {
+    background: #fff5f0;
+}
+
+#speech-bubble.roast-mode::before {
+    border-top-color: #fff5f0;
+}
+
+#speech-bubble.cheer-mode {
+    background: #f1fff8;
+}
+
+#speech-bubble.cheer-mode::before {
+    border-top-color: #f1fff8;
+}
+
+#speech-bubble.fade-out {
+    animation: bubbleFadeOut 0.3s cubic-bezier(0.4, 0.0, 0.2, 1) forwards;
+}
+
+#bubble-text {
+    position: relative;
+    z-index: 4;
+    font-size: 12px;
+    line-height: 1.35;
+    font-weight: 700;
+    letter-spacing: 0;
+}
+
+.cursor {
+    display: inline-block;
+    width: 2px;
+    height: 1em;
+    margin-left: 2px;
+    background: currentColor;
+    animation: blink 0.8s steps(2, start) infinite;
+    vertical-align: -2px;
+}
+
+/* ══════════════════════════════════════════════════════
+   ROBOT WALKER — Container for the SVG character
+   ══════════════════════════════════════════════════════ */
+
+#robot-walker {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 120px;
+    height: 120px;
+    will-change: transform;
+}
+
+#robot-svg {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+}
+
+/* ══════════════════════════════════════════════════════
+   SVG BASE STYLES
+   ══════════════════════════════════════════════════════ */
+
+.outline {
+    stroke: var(--outline);
+    stroke-width: 8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.fill-white { fill: var(--white); }
+.fill-blue { fill: var(--blue); }
+.fill-blue-dark { fill: var(--blue-dark); }
+.fill-blue-light { fill: var(--blue-light); }
+
+#robot-walker.girl-bot {
+    --blue: #ff63b2;
+    --blue-dark: #ff3f9c;
+    --blue-light: #ffb3de;
+}
+
+#robot-walker.girl-bot #visorGrad stop:nth-child(1) { stop-color: #ff8bd0; }
+#robot-walker.girl-bot #visorGrad stop:nth-child(2) { stop-color: #ff6dbc; }
+#robot-walker.girl-bot #visorGrad stop:nth-child(3) { stop-color: #ff9bd8; }
+#robot-walker.girl-bot #earGrad stop:nth-child(1) { stop-color: #ff93ca; }
+#robot-walker.girl-bot #earGrad stop:nth-child(2) { stop-color: #ff4aa2; }
+#robot-walker.girl-bot #robot-svg text { fill: #ff5aa8; }
+
+.soft {
+    fill: rgba(0, 0, 0, .06);
+    stroke: none;
+}
+
+/*
+ * CRITICAL: transform-box: view-box makes transform-origin use SVG
+ * viewBox coordinates (0-1024), so rotation pivots land exactly on
+ * the drawn joint positions. fill-box was wrong — it used each
+ * element's own bounding box, causing limbs to fly off.
+ */
+.rig {
+    transform-box: view-box;
+    will-change: transform;
+}
+
+.piece {
+    transform-box: fill-box;
+    transform-origin: center;
+}
+
+/* ── Expression System ── */
+.brow-angry,
+.mouth-angry,
+.mouth-happy,
+.brow-happy {
+    display: none;
+}
+
+.brow-normal,
+.mouth-normal {
+    display: inline;
+}
+
+/* Stomp effects hidden by default */
+.stomp-effects line {
+    opacity: 0;
+}
+
+/* ══════════════════════════════════════════════════════
+   WALK ANIMATION — Slow, gentle, grounded
+   ══════════════════════════════════════════════════════ */
+
+/* Arms swing gently from shoulder joints — opposite phase */
+.walking #leftArm {
+    animation: walkArmLeft 1.6s ease-in-out infinite;
+    transform-origin: 366px 464px;
+}
+
+.walking #rightArm {
+    animation: walkArmRight 1.6s ease-in-out infinite;
+    transform-origin: 658px 464px;
+}
+
+/* Legs step from hip joints — opposite phase to same-side arm */
+.walking #leftLeg {
+    animation: walkLegLeft 1.6s ease-in-out infinite;
+    transform-origin: 404px 710px;
+}
+
+.walking #rightLeg {
+    animation: walkLegRight 1.6s ease-in-out infinite;
+    transform-origin: 620px 710px;
+}
+
+/* Subtle head bob */
+.walking #head {
+    animation: walkHeadBob 1.6s ease-in-out infinite;
+    transform-origin: 512px 200px;
+}
+
+/* Soft antenna sway */
+.walking #antenna {
+    animation: antennaSway 1.6s ease-in-out infinite;
+    transform-origin: 512px 84px;
+}
+
+/* Antenna bulb glow pulse */
+.walking #bulb-glow {
+    animation: bulbPulse 2.5s ease-in-out infinite;
+}
+
+@keyframes walkArmLeft {
+    0%, 100% { transform: rotate(0deg); }
+    25%      { transform: rotate(7deg); }
+    75%      { transform: rotate(-7deg); }
+}
+
+@keyframes walkArmRight {
+    0%, 100% { transform: rotate(0deg); }
+    25%      { transform: rotate(-7deg); }
+    75%      { transform: rotate(7deg); }
+}
+
+@keyframes walkLegLeft {
+    0%, 100% { transform: rotate(0deg); }
+    25%      { transform: rotate(4deg); }
+    75%      { transform: rotate(-4deg); }
+}
+
+@keyframes walkLegRight {
+    0%, 100% { transform: rotate(0deg); }
+    25%      { transform: rotate(-4deg); }
+    75%      { transform: rotate(4deg); }
+}
+
+@keyframes walkHeadBob {
+    0%, 100% { transform: translateY(0); }
+    25%      { transform: translateY(-2px); }
+    75%      { transform: translateY(-2px); }
+}
+
+@keyframes antennaSway {
+    0%, 100% { transform: rotate(0deg); }
+    25%      { transform: rotate(1.5deg); }
+    75%      { transform: rotate(-1.5deg); }
+}
+
+@keyframes bulbPulse {
+    0%, 100% { opacity: 0.9; }
+    50%      { opacity: 1; }
+}
+
+
+/* ══════════════════════════════════════════════════════
+   CHEER ANIMATION — Jump, arms up, legs spread, green bulb
+   Ref: Robot jumping with both fists raised
+   ══════════════════════════════════════════════════════ */
+
+/* Whole SVG jumps */
+.cheering #robot-svg {
+    animation: cheerJump 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) infinite;
+}
+
+/* Both arms raised high (fists up) — ONLY rotate, no translate */
+.cheering #leftArm {
+    animation: cheerArmLeft 0.9s cubic-bezier(0.34, 1.4, 0.64, 1) infinite;
+    transform-origin: 366px 464px;
+}
+
+.cheering #rightArm {
+    animation: cheerArmRight 0.9s cubic-bezier(0.34, 1.4, 0.64, 1) infinite;
+    transform-origin: 658px 464px;
+}
+
+/* Legs spread outward — ONLY rotate, no translate */
+.cheering #leftLeg {
+    animation: cheerLegLeft 0.9s cubic-bezier(0.34, 1.4, 0.64, 1) infinite;
+    transform-origin: 404px 710px;
+}
+
+.cheering #rightLeg {
+    animation: cheerLegRight 0.9s cubic-bezier(0.34, 1.4, 0.64, 1) infinite;
+    transform-origin: 620px 710px;
+}
+
+/* Head tilts with excitement */
+.cheering #head {
+    animation: cheerHead 0.9s ease-in-out infinite;
+    transform-origin: 512px 200px;
+}
+
+/* Antenna bounces */
+.cheering #antenna {
+    animation: cheerAntenna 0.9s ease-in-out infinite;
+    transform-origin: 512px 84px;
+}
+
+/* Bulb turns GREEN and flashes */
+.cheering #bulb-glow {
+    fill: var(--green);
+    animation: cheerBulbFlash 0.45s ease-in-out infinite;
+}
+
+/* Happy expression */
+.cheering .brow-normal,
+.cheering .mouth-normal,
+.cheering .brow-angry,
+.cheering .mouth-angry {
+    display: none;
+}
+
+.cheering .brow-happy,
+.cheering .mouth-happy {
+    display: inline;
+}
+
+/* Shadow shrinks when airborne */
+.cheering #ground-shadow {
+    animation: cheerShadow 0.9s cubic-bezier(0.34, 1.4, 0.64, 1) infinite;
+    transform-origin: 512px 962px;
+    transform-box: view-box;
+}
+
+@keyframes cheerJump {
+    0%   { transform: translateY(0); }
+    18%  { transform: translateY(6px) scaleY(0.97); }
+    50%  { transform: translateY(-35px) scaleY(1.03); }
+    75%  { transform: translateY(-28px); }
+    90%  { transform: translateY(3px) scaleY(0.98); }
+    100% { transform: translateY(0); }
+}
+
+/* Arms rotate UP from shoulder. Negative = counter-clockwise = up-left */
+@keyframes cheerArmLeft {
+    0%, 100% { transform: rotate(0deg); }
+    18%  { transform: rotate(5deg); }
+    45%  { transform: rotate(-95deg); }
+    60%  { transform: rotate(-100deg); }
+    78%  { transform: rotate(-85deg); }
+    90%  { transform: rotate(-15deg); }
+}
+
+@keyframes cheerArmRight {
+    0%, 100% { transform: rotate(0deg); }
+    18%  { transform: rotate(-5deg); }
+    45%  { transform: rotate(95deg); }
+    60%  { transform: rotate(100deg); }
+    78%  { transform: rotate(85deg); }
+    90%  { transform: rotate(15deg); }
+}
+
+/* Legs spread apart — left rotates left, right rotates right */
+@keyframes cheerLegLeft {
+    0%, 100% { transform: rotate(0deg); }
+    18%  { transform: rotate(2deg); }
+    45%  { transform: rotate(-18deg); }
+    60%  { transform: rotate(-20deg); }
+    78%  { transform: rotate(-12deg); }
+    90%  { transform: rotate(-3deg); }
+}
+
+@keyframes cheerLegRight {
+    0%, 100% { transform: rotate(0deg); }
+    18%  { transform: rotate(-2deg); }
+    45%  { transform: rotate(18deg); }
+    60%  { transform: rotate(20deg); }
+    78%  { transform: rotate(12deg); }
+    90%  { transform: rotate(3deg); }
+}
+
+@keyframes cheerHead {
+    0%, 100% { transform: rotate(0deg); }
+    40%  { transform: rotate(-3deg); }
+    55%  { transform: rotate(3deg); }
+    70%  { transform: rotate(-2deg); }
+}
+
+@keyframes cheerAntenna {
+    0%, 100% { transform: rotate(0deg); }
+    30% { transform: rotate(-6deg); }
+    55% { transform: rotate(7deg); }
+    75% { transform: rotate(-4deg); }
+}
+
+@keyframes cheerBulbFlash {
+    0%, 100% { filter: brightness(1) drop-shadow(0 0 6px var(--green-glow)); }
+    50%      { filter: brightness(1.5) drop-shadow(0 0 16px var(--green-glow)); }
+}
+
+@keyframes cheerShadow {
+    0%, 100% { transform: scaleX(1); opacity: 1; }
+    50%      { transform: scaleX(0.5); opacity: 0.3; }
+}
+
+
+/* ══════════════════════════════════════════════════════
+   ROAST ANIMATION — Angry stance, pointing, stomping, red bulb
+   Ref: Robot stomping with fist up, pointing forward
+   ══════════════════════════════════════════════════════ */
+
+/* Slight angry lean on the whole SVG */
+.roasting #robot-svg {
+    animation: roastLean 0.8s ease-in-out infinite;
+}
+
+/* Left arm points forward (scolding) — rotate from shoulder only */
+.roasting #leftArm {
+    animation: roastPointArm 0.8s ease-in-out infinite;
+    transform-origin: 366px 464px;
+}
+
+/* Right arm raised fist — rotate from shoulder only */
+.roasting #rightArm {
+    animation: roastFistArm 0.8s ease-in-out infinite;
+    transform-origin: 658px 464px;
+}
+
+/* Left leg stomps — rotate from hip only */
+.roasting #leftLeg {
+    animation: roastStomp 0.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    transform-origin: 404px 710px;
+}
+
+/* Right leg planted firmly */
+.roasting #rightLeg {
+    animation: roastPlantLeg 0.8s ease-in-out infinite;
+    transform-origin: 620px 710px;
+}
+
+/* Head shakes angrily */
+.roasting #head {
+    animation: roastHeadShake 0.4s ease-in-out infinite;
+    transform-origin: 512px 200px;
+}
+
+/* Antenna shakes */
+.roasting #antenna {
+    animation: roastAntennaShake 0.4s ease-in-out infinite;
+    transform-origin: 512px 84px;
+}
+
+/* Bulb turns RED and pulses intensely */
+.roasting #bulb-glow {
+    fill: var(--red);
+    animation: roastBulbPulse 0.4s ease-in-out infinite;
+}
+
+/* Angry expression */
+.roasting .brow-normal,
+.roasting .mouth-normal,
+.roasting .brow-happy,
+.roasting .mouth-happy {
+    display: none;
+}
+
+.roasting .brow-angry,
+.roasting .mouth-angry {
+    display: inline;
+}
+
+/* Stomp impact FX */
+.roasting .stomp-effects line {
+    animation: stompFxFlash 0.8s ease-in-out infinite;
+}
+.roasting .stomp-effects line:nth-child(2) { animation-delay: 0.05s; }
+.roasting .stomp-effects line:nth-child(3) { animation-delay: 0.1s; }
+
+/* Shadow on stomp */
+.roasting #ground-shadow {
+    animation: roastShadow 0.8s ease-in-out infinite;
+    transform-origin: 512px 962px;
+    transform-box: view-box;
+}
+
+/* Torso leaning */
+.roasting #torso {
+    animation: roastTorsoLean 0.8s ease-in-out infinite;
+    transform-origin: 512px 425px;
+    transform-box: view-box;
+}
+
+@keyframes roastLean {
+    0%, 100% { transform: rotate(0deg); }
+    35%      { transform: rotate(2deg); }
+    65%      { transform: rotate(1deg); }
+}
+
+/* Point arm forward: positive rotation swings left arm clockwise (rightward/forward) */
+@keyframes roastPointArm {
+    0%, 100% { transform: rotate(50deg); }
+    35%      { transform: rotate(58deg); }
+    65%      { transform: rotate(52deg); }
+}
+
+/* Fist arm up: negative rotation raises right arm counter-clockwise (upward) */
+@keyframes roastFistArm {
+    0%, 100% { transform: rotate(-45deg); }
+    30%      { transform: rotate(-55deg); }
+    60%      { transform: rotate(-48deg); }
+    80%      { transform: rotate(-58deg); }
+}
+
+/* Stomp: leg swings up then slams down — ONLY rotate */
+@keyframes roastStomp {
+    0%   { transform: rotate(0deg); }
+    25%  { transform: rotate(-18deg); }
+    45%  { transform: rotate(-22deg); }
+    60%  { transform: rotate(3deg); }
+    75%  { transform: rotate(1deg); }
+    100% { transform: rotate(0deg); }
+}
+
+@keyframes roastPlantLeg {
+    0%, 100% { transform: rotate(2deg); }
+    50%      { transform: rotate(4deg); }
+}
+
+@keyframes roastHeadShake {
+    0%, 100% { transform: rotate(0deg); }
+    25%      { transform: rotate(-2.5deg); }
+    75%      { transform: rotate(2.5deg); }
+}
+
+@keyframes roastAntennaShake {
+    0%, 100% { transform: rotate(0deg); }
+    25%      { transform: rotate(-4deg); }
+    75%      { transform: rotate(4deg); }
+}
+
+@keyframes roastBulbPulse {
+    0%, 100% { filter: brightness(1) drop-shadow(0 0 6px var(--red-glow)); }
+    50%      { filter: brightness(1.6) drop-shadow(0 0 18px var(--red-glow)); }
+}
+
+@keyframes stompFxFlash {
+    0%, 45%, 100% { opacity: 0; }
+    55%  { opacity: 0.8; }
+    70%  { opacity: 0.4; }
+    85%  { opacity: 0; }
+}
+
+@keyframes roastShadow {
+    0%, 100% { transform: scaleX(1); opacity: 1; }
+    45%      { transform: scaleX(0.75); opacity: 0.6; }
+    60%      { transform: scaleX(1.1); opacity: 1; }
+}
+
+@keyframes roastTorsoLean {
+    0%, 100% { transform: rotate(0deg); }
+    40%      { transform: rotate(1.5deg); }
+}
+
+
+/* ══════════════════════════════════════════════════════
+   SHARED KEYFRAMES
+   ══════════════════════════════════════════════════════ */
+
+@keyframes bubbleIn {
+    0%   { opacity: 0; transform: translateY(10px) scale(0.9); }
+    60%  { opacity: 1; transform: translateY(-2px) scale(1.02); }
+    100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes bubbleFadeOut {
+    0%   { opacity: 1; transform: translateY(0) scale(1); }
+    100% { opacity: 0; transform: translateY(-8px) scale(0.94); }
+}
+
+@keyframes blink {
+    50% { opacity: 0; }
+}
+
+/* ══════════════════════════════════════════════════════
+   DIRECTION FLIP — Mirror SVG when walking left
+   ══════════════════════════════════════════════════════ */
+#robot-walker.facing-left #robot-svg {
+    transform: scaleX(-1);
+}
+
+/* ══════════════════════════════════════════════════════
+   RESPONSIVE
+   ══════════════════════════════════════════════════════ */
+@media (max-height: 400px) {
+    #robot-walker {
+        width: 90px;
+        height: 90px;
+    }
+
+    #speech-bubble {
+        min-height: 40px;
+        padding: 8px 10px;
+        font-size: 11px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}

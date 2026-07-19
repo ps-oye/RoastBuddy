@@ -1,0 +1,169 @@
+{
+  "name": "roast-buddy",
+  "displayName": "Roast Buddy",
+  "description": "Animated characters that roast you for blindly accepting AI code and cheer you for manually typing or editing code.",
+  "version": "0.1.0",
+  "publisher": "roastbuddy",
+  "license": "MIT",
+  "icon": "media/icon.png",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other",
+    "Education"
+  ],
+  "keywords": [
+    "ai",
+    "fun",
+    "roast",
+    "developer productivity",
+    "copilot",
+    "humor",
+    "code-review",
+    "animation"
+  ],
+  "activationEvents": [
+    "onStartupFinished",
+    "onView:roastBuddy.characterView",
+    "onCommand:roastBuddy.showCharacter",
+    "onCommand:roastBuddy.hideCharacter",
+    "onCommand:roastBuddy.toggleDynamicMode",
+    "onCommand:roastBuddy.keepHunk",
+    "onCommand:roastBuddy.keepFile",
+    "onCommand:roastBuddy.keepAll"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "roastBuddy.showCharacter",
+        "title": "Roast Buddy: Show Character"
+      },
+      {
+        "command": "roastBuddy.hideCharacter",
+        "title": "Roast Buddy: Hide Character"
+      },
+      {
+        "command": "roastBuddy.toggleDynamicMode",
+        "title": "Roast Buddy: Toggle Dynamic AI Messages"
+      },
+      {
+        "command": "roastBuddy.keepHunk",
+        "title": "Roast Buddy: Keep (Accept Single Change)"
+      },
+      {
+        "command": "roastBuddy.keepFile",
+        "title": "Roast Buddy: Keep Chat Edits in File"
+      },
+      {
+        "command": "roastBuddy.keepAll",
+        "title": "Roast Buddy: Keep All Edits"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "roastBuddy.keepHunk",
+        "key": "ctrl+y",
+        "when": "inChatEditingSession || inlineChatVisible"
+      },
+      {
+        "command": "roastBuddy.keepFile",
+        "key": "ctrl+shift+y",
+        "when": "inChatEditingSession"
+      },
+      {
+        "command": "roastBuddy.keepAll",
+        "key": "ctrl+enter",
+        "when": "inChatEditingSession"
+      }
+    ],
+    "views": {
+      "explorer": [
+        {
+          "id": "roastBuddy.characterView",
+          "name": "Roast Buddy",
+          "type": "webview"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Roast Buddy",
+      "properties": {
+        "roastBuddy.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable or disable Roast Buddy reactions."
+        },
+        "roastBuddy.characterType": {
+          "type": "string",
+          "default": "robot",
+          "enum": [
+            "robot",
+            "girlBot"
+          ],
+          "enumDescriptions": [
+            "Animated SVG robot buddy",
+            "Pink bow girl bot buddy"
+          ],
+          "description": "Choose your Roast Buddy character."
+        },
+        "roastBuddy.roastIntensity": {
+          "type": "string",
+          "default": "medium",
+          "enum": [
+            "mild",
+            "medium",
+            "savage"
+          ],
+          "enumDescriptions": [
+            "Gentle teasing — safe for sensitive souls",
+            "Balanced wit — the sweet spot",
+            "No mercy — enter at your own risk"
+          ],
+          "description": "How hard should Roast Buddy roast you?"
+        },
+        "roastBuddy.messageLanguage": {
+          "type": "string",
+          "default": "hinglish",
+          "enum": [
+            "english",
+            "hinglish"
+          ],
+          "enumDescriptions": [
+            "English roast and cheer messages",
+            "Hinglish roast and cheer messages"
+          ],
+          "description": "Choose the language for Roast Buddy's roast and cheer messages."
+        },
+        "roastBuddy.useDynamicMessages": {
+          "type": "boolean",
+          "default": false,
+          "markdownDescription": "Use the IDE's language model to generate unique roast/cheer messages. **⚠️ This consumes your Copilot plan tokens.**"
+        },
+
+        "roastBuddy.cooldownMs": {
+          "type": "number",
+          "default": 10000,
+          "minimum": 2000,
+          "maximum": 60000,
+          "description": "Minimum milliseconds between Roast Buddy reactions."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "lint": "eslint src --ext ts"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "@types/vscode": "^1.85.0",
+    "@typescript-eslint/eslint-plugin": "^7.0.0",
+    "@typescript-eslint/parser": "^7.0.0",
+    "eslint": "^8.56.0",
+    "typescript": "^5.3.0"
+  }
+}
