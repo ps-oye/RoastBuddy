@@ -6,11 +6,6 @@
 
 Roast Buddy is a VS Code extension that adds humor to your workflow with animated sidebar characters. It roasts you when you accept AI‑generated code (Github Copilot Chat), and cheers you when you write or edit code manually — making every coding session sarcastically delightful.
 
-![Version](https://img.shields.io/visual-studio-marketplace/v/ps-oye.roast-buddy)
-![Downloads](https://img.shields.io/visual-studio-marketplace/d/ps-oye.roast-buddy)
-![Stars](https://img.shields.io/github/stars/ps-oye/roast-buddy?style=social)
-![License](https://img.shields.io/github/license/ps-oye/roast-buddy)
-
 ---
 
 ## 🎬 Demo
