@@ -2,7 +2,7 @@
   "name": "roast-buddy",
   "displayName": "Roast Buddy",
   "description": "Animated characters that roast you for blindly accepting AI code and cheer you for manually typing or editing code.",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "publisher": "ps-oye",
   "license": "MIT",
   "icon": "media/icon.png",

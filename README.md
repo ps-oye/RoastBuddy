@@ -1,7 +1,7 @@
 # Roast Buddy
 
 <p align="center">
-  <img src="https://github.com/ps-oye/RoastBuddy/blob/main/media/icon_transparent.png" 
+  <img src="https://raw.githubusercontent.com/ps-oye/RoastBuddy/refs/heads/main/media/icon_transparent.png" 
        alt="Roast Buddy Icon" width="150"/>
 </p>
 
@@ -11,7 +11,7 @@ Roast Buddy is a VS Code extension that adds humor to your workflow with animate
 
 ## 🎬 Demo
 
-![Demo](https://github.com/ps-oye/RoastBuddy/blob/main/media/demo.gif)
+![Demo](https://raw.githubusercontent.com/ps-oye/RoastBuddy/refs/heads/main/media/demo.gif)
 
 ---
 
@@ -31,12 +31,12 @@ code --install-extension ps-oye.roast-buddy
 
 <p align="center">
   <span style="display:inline-block; text-align:center; margin:20px;">
-    <img src="https://github.com/ps-oye/RoastBuddy/blob/main/media/boyBot.png" 
+    <img src="https://raw.githubusercontent.com/ps-oye/RoastBuddy/refs/heads/main/media/boyBot.png" 
        alt="Roast Buddy Icon" width="150"/>  
     <b>Boy Bot</b>
   </span>
   <span style="display:inline-block; text-align:center; margin:20px;">
-    <img src="https://github.com/ps-oye/RoastBuddy/blob/main/media/girlBot.png" 
+    <img src="https://raw.githubusercontent.com/ps-oye/RoastBuddy/refs/heads/main/media/girlBot.png" 
        alt="Demo" width="150"/>
     <b>Girl Bot</b>
   </span>
