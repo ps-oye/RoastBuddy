@@ -22,7 +22,7 @@ From VS Code Marketplace:
 
 Or via CLI:
 ```bash
-ext install ps-oye.roast-buddy
+code --install-extension ps-oye.roast-buddy
 ```
 
 ## Features
@@ -88,7 +88,6 @@ Enable dynamic mode to get uniquely generated roasts and cheers powered by your 
 | `roastBuddy.characterType` | `robot` | Choose character: `robot`, `girlBot` |
 | `roastBuddy.roastIntensity` | `medium` | Roast level: `mild`, `medium`, `savage` |
 | `roastBuddy.useDynamicMessages` | `false` | Use AI-generated messages (consumes tokens) |
-| `roastBuddy.lineThreshold` | `5` | Lines to trigger "full-page" detection |
 | `roastBuddy.cooldownMs` | `10000` | Cooldown between reactions (ms) |
 
 ## Commands
@@ -105,11 +104,11 @@ Enable dynamic mode to get uniquely generated roasts and cheers powered by your 
 - Uses original CSS-only character art, no image replacement for reactions
 
 ## 🌟 Why Star This Repo
-Every ⭐ helps PS-Oye roast more developers worldwide.
+Every ⭐ helps roast more developers worldwide.
 Show your support — it’s free, funny, and fuels creativity.
 
 ## 🤝 Contribute
-Got a new roast line or animation idea? Fork it and make PS-Oye sassier.
+Got a new roast line or animation idea? Fork it and make it sassier.
 PRs welcome — humor encouraged.
 
 ## 🔗 Links
